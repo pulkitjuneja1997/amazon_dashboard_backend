@@ -69,7 +69,7 @@ exports.appRoutes = (app) => {
         marketplaces.connecToWoocommerce(req, res)
     })
 
-    app.post( '/storeWoocommerceKeys2', function( req, res ){
+    app.get( '/storeWoocommerceKeys2', function( req, res ){
         marketplaces.connecToWoocommerce(req, res)
     })
 
