@@ -16,7 +16,7 @@ const app = express();
 app.use(cors());
 
 
-// routes.appRoutes(app);
+routes.appRoutes(app);
 app.get( '/', function( req, res ){
     res.status(200).json({'success': true, data: ['homepage']})
 })
