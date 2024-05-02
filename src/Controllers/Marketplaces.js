@@ -4,7 +4,7 @@ const fs = require('fs');
 exports.connecToWoocommerce = function( req, res ){
 
    try{
-      fs.writeFileSync('./woocommerce.txt', CircularJSON.stringify(req) );
+     //  fs.writeFileSync('./woocommerce.txt', CircularJSON.stringify(req) );
       res.send( JSON.parse(CircularJSON.stringify(req)));
 
    } catch( err ){
