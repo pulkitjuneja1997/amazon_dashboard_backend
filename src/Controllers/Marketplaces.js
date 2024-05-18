@@ -14,7 +14,7 @@ exports.connecToWoocommerce = function( req, res ){
       // } else {
 
          let return_url   = process.env.FRONTEND_URL + 'home';
-       
+         console.log(return_url);
       
          let callback_url = process.env.BACKEND_URL + 'storeWoocommerceKeys';
          let url = req.body.domain + 'wc-auth/v1/authorize?app_name=Blink&scope=read_write&user_id=blink&return_url=' + return_url + '&callback_url=' + callback_url;
