@@ -7,12 +7,14 @@ async function usersControllers(req, res){
     try{
  
         const newUser = new usersModel.usersModel(req.body);
+        console.log('newUser', newUser);
         const encodePasswordResults = await newUser.encodePassword(); 
 
         if( encodePasswordResults.success ){
             const generateTokenResults  = await newUser.generateToken();
             console.log( generateTokenResults )
             if( generateTokenResults.success ){
+                const savedUser = await newUser.save();
                 res.status(200).json( { messasge: 'User hasbeen successfully registered', url: process.env.FRONTEND_URL + 'home', userData: {
                     token: generateTokenResults.data.token,
                     email: generateTokenResults.data.email

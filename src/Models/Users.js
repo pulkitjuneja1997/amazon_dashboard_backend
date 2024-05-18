@@ -6,24 +6,24 @@ const jwt = require('jsonwebtoken')
 
 const users_schems = {
     domain: {
-        type: String,
-        required: true
+        type: 'string',
+        required: false
     },
     email: {
-       type: String,
+       type: 'string',
        required: true
     },
     password: {
-        type: String,
+        type: 'string',
         required: false
     },
     token: {
-        type: String,
-        required: true
+        type: 'string',
+        required: false
     },
     woo_keys: {
         type: Object,
-        required: true
+        required: false
     }
 }
 

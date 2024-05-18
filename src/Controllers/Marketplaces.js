@@ -19,7 +19,7 @@ exports.connecToWoocommerce = function( req, res ){
          let return_url   = process.env.FRONTEND_URL + 'home';
          console.log(return_url);
       
-         let callback_url = process.env.BACKEND_URL + 'storeWoocommerceKeys?username=' + req.body.username ;
+         let callback_url = process.env.BACKEND_URL + 'storeWoocommerceKeys?email=' + req.body.email ;
          let url = req.body.domain + 'wc-auth/v1/authorize?app_name=Blink&scope=read_write&user_id=blink&return_url=' + return_url + '&callback_url=' + callback_url;
          res.send({ success: true, data: { url: url } }) 
          
@@ -40,28 +40,29 @@ exports.storeWoocommerceKeys = async function( req, res ){
 
    let data    = req.body ? req.body : {};
 
-   console.log(data);
-   console.log( typeof data  );
-   console.log('req params');
-   console.log( params );
+   console.log( req.quey.email );
 
 
    res.send({ success: true, data:'hpy' })
 
-   // if( typeof data == 'string' ){
-   //    data = JSON.parse(data);
-   // }
+   if( typeof data == 'string' ){
+      data = JSON.parse(data);
+   }
 
-   // try{
-   //    // let records = await users_model.usersModel.findOneAndUpdate( {
-   //    //    email: data
-   //    // }, {set: {}})
+   try{
+      let records = await users_model.usersModel.findOneAndUpdate( {
+         email: data
+      }, { $set: {
+            "woo_keys": req.body
+      } })
 
-   //    res.send({ success: true, data:'hpy' })
+      console.log(records);
+
+      res.send({ success: true, data:'hpy' })
       
-   // }  catch( err ){
-   //    res.send({ success: false, error: err.message })
-   // }
+   }  catch( err ){
+      res.send({ success: false, error: err.message })
+   }
       
 
 
