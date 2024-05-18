@@ -2,7 +2,10 @@ const CircularJSON = require("circular-json");
 const fs = require('fs');
 const connection = require('../../Connection');
 const users_model = require('../Models/Users');
-require('dotenv').config({path:`.env.${process.env.NODE_ENV}`});
+
+if (process.env.NODE_ENV !== 'production') {
+   require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });
+}
 
 exports.connecToWoocommerce = function( req, res ){
 
