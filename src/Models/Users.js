@@ -6,19 +6,23 @@ const jwt = require('jsonwebtoken')
 
 const users_schems = {
     domain: {
-        type: 'string',
+        type: String,
         required: true
     },
     email: {
-       type: 'string',
+       type: String,
        required: true
     },
     password: {
-        type: 'string',
+        type: String,
         required: false
     },
     token: {
-        type:'string',
+        type: String,
+        required: true
+    },
+    woo_keys: {
+        type: Object,
         required: true
     }
 }
@@ -65,11 +69,11 @@ const usersSchema = mongooseInsatnce.mongoose.Schema(users_schems);
 
 
 
-usersSchema.methods.encodePassword =  function ( next ){
+usersSchema.methods.encodePassword =  async function ( next ){
     var user = this;
     try{
-        const salt     = bcrypt.genSaltSync(10);
-        const password = bcrypt.hashSync( JSON.stringify(user), salt );
+        const salt     = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash( JSON.stringify(user), salt );
 
         user.password = password
         console.log(user);
@@ -81,7 +85,7 @@ usersSchema.methods.encodePassword =  function ( next ){
 
 }
 
-usersSchema.methods.generateToken = function(next){
+usersSchema.methods.generateToken = async function(next){
 
     let user = this;
     console.log( 'user', user );
