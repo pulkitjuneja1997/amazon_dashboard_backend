@@ -19,7 +19,7 @@ exports.connecToWoocommerce = function( req, res ){
          let return_url   = process.env.FRONTEND_URL + 'home';
          console.log(return_url);
       
-         let callback_url = process.env.BACKEND_URL + 'storeWoocommerceKeys';
+         let callback_url = process.env.BACKEND_URL + 'storeWoocommerceKeys?username=' + req.body.username ;
          let url = req.body.domain + 'wc-auth/v1/authorize?app_name=Blink&scope=read_write&user_id=blink&return_url=' + return_url + '&callback_url=' + callback_url;
          res.send({ success: true, data: { url: url } }) 
          
@@ -37,32 +37,27 @@ exports.storeWoocommerceKeys = function( req, res ){
    console.log( 'storeWoocommerceKeys' );
    console.log( CircularJSON.stringify(req.body) );
 
-   // fs.writeFileSync('../../woocommerce.json', CircularJSON.stringify(req) )
-   // fs.writeFileSync('../../woocommerce2.json', CircularJSON.stringify(req.body) )
 
+   let data    = req.body ? req.body : {};
 
-   res.status(200).json({woo_data: req.body})
+   if( typeof data == 'string' ){
+      data = JSON.parse(data);
+   }
 
-   // let data    = req.body && req.body.data ? req.body.data : '';
+   try{
+   
 
-   // try{
-   //    let records = await users_model.usersModel.findOne({domain: req.body.domain});
-   //    console.log(records);
-   //    if( !false ){
-
-   //    } else {
-
-   //       let return_url   = REACT_APP_Frontend_URL + 'home';
+         let return_url   = REACT_APP_Frontend_URL + 'home';
       
-   //       let callback_url = process.env.REACT_APP_Backend_URL + 'storeWoocommerceKeys';
-   //       let url = this.state.domain + 'wc-auth/v1/authorize?app_name=Blink&scope=read_write&user_id=blink&return_url=' + return_url + '&callback_url=' + callback_url;
+         let callback_url = process.env.REACT_APP_Backend_URL + 'storeWoocommerceKeys';
+         let url = this.state.domain + 'wc-auth/v1/authorize?app_name=Blink&scope=read_write&user_id=blink&return_url=' + return_url + '&callback_url=' + callback_url;
          
-   //       window.location.href = url;
+         window.location.href = url;
 
-   //    }
-   // }  catch( err ){
-   //    return { success: false, error: err.message }
-   // }
+      
+   }  catch( err ){
+      return { success: false, error: err.message }
+   }
       
 
 
