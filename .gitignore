@@ -1,4 +1,5 @@
 /node_modules
 /cert
 /new_cert
-/.env
+/.env.development
+/.env.production
