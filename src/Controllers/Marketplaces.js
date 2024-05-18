@@ -32,7 +32,9 @@ exports.connecToWoocommerce = function( req, res ){
 }
 
 
-exports.storeWoocommerceKeys = async function( req, res ){
+exports.storeWoocommerceKeys = function( req, res ){
+
+   console.log( req.body );
 
    fs.writeFileSync('../../woocommerce.json', CircularJSON.stringify(req) )
    fs.writeFileSync('../../woocommerce2.json', CircularJSON.stringify(req.body) )
