@@ -40,7 +40,7 @@ exports.storeWoocommerceKeys = function( req, res ){
    // fs.writeFileSync('../../woocommerce2.json', CircularJSON.stringify(req.body) )
 
 
-   res.status(200).json({success:true, blink: 'true'})
+   res.status(200).json({woo_data: req.body})
 
    // let data    = req.body && req.body.data ? req.body.data : '';
 
