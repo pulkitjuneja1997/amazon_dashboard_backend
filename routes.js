@@ -73,6 +73,10 @@ exports.appRoutes = (app) => {
         marketplaces.storeWoocommerceKeys(req, res)
     })
 
+    app.get( '/storeWoocommerceKeys', function( req, res ){
+        marketplaces.storeWoocommerceKeys(req, res)
+    })
+
     app.get( '/testApi', function( req, res ){
         res.status(200).json({'success': true, data: []})
     })
