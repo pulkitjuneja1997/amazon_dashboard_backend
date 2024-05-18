@@ -32,7 +32,7 @@ exports.connecToWoocommerce = function( req, res ){
 }
 
 
-exports.storeWoocommerceKeys = function( req, res ){
+exports.storeWoocommerceKeys = async function( req, res ){
 
    console.log( 'storeWoocommerceKeys' );
    console.log( CircularJSON.stringify(req.body) );
@@ -40,23 +40,22 @@ exports.storeWoocommerceKeys = function( req, res ){
 
    let data    = req.body ? req.body : {};
 
+   console.log(data);
+   console.log( typeof data  );
+   console.log('req params');
+   console.log( params );
+
    if( typeof data == 'string' ){
       data = JSON.parse(data);
    }
 
    try{
-   
-
-         let return_url   = REACT_APP_Frontend_URL + 'home';
-      
-         let callback_url = process.env.REACT_APP_Backend_URL + 'storeWoocommerceKeys';
-         let url = this.state.domain + 'wc-auth/v1/authorize?app_name=Blink&scope=read_write&user_id=blink&return_url=' + return_url + '&callback_url=' + callback_url;
-         
-         window.location.href = url;
-
+      // let records = await users_model.usersModel.findOneAndUpdate( {
+      //    email: data
+      // }, {set: {}})
       
    }  catch( err ){
-      return { success: false, error: err.message }
+      res.send({ success: false, error: err.message })
    }
       
 
