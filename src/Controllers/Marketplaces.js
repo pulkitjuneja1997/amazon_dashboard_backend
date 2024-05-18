@@ -45,20 +45,23 @@ exports.storeWoocommerceKeys = async function( req, res ){
    console.log('req params');
    console.log( params );
 
-   if( typeof data == 'string' ){
-      data = JSON.parse(data);
-   }
 
-   try{
-      // let records = await users_model.usersModel.findOneAndUpdate( {
-      //    email: data
-      // }, {set: {}})
+   res.send({ success: true, data:'hpy' })
 
-      res.send({ success: true, data:'hpy' })
+   // if( typeof data == 'string' ){
+   //    data = JSON.parse(data);
+   // }
+
+   // try{
+   //    // let records = await users_model.usersModel.findOneAndUpdate( {
+   //    //    email: data
+   //    // }, {set: {}})
+
+   //    res.send({ success: true, data:'hpy' })
       
-   }  catch( err ){
-      res.send({ success: false, error: err.message })
-   }
+   // }  catch( err ){
+   //    res.send({ success: false, error: err.message })
+   // }
       
 
 
