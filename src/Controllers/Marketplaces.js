@@ -47,7 +47,7 @@ exports.storeWoocommerceKeys = async function( req, res ){
          email: email
       }, { $set: {
             "woo_keys": req.body
-      } })
+      } },  { new: true } )
 
       console.log(records);
       res.send({ success: true, data:'hpy' })
