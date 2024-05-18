@@ -4,7 +4,7 @@ const connection = require('../../Connection');
 const users_model = require('../Models/Users');
 require('dotenv').config({path:`.env.${process.env.NODE_ENV}`});
 
-exports.connecToWoocommerce = async function( req, res ){
+exports.connecToWoocommerce = function( req, res ){
 
    try{
       // let records = await users_model.usersModel.findOne({domain: req.body.domain});
@@ -14,16 +14,15 @@ exports.connecToWoocommerce = async function( req, res ){
       // } else {
 
          let return_url   = process.env.FRONTEND_URL + 'home';
-         console.log(return_url);
+       
       
          let callback_url = process.env.BACKEND_URL + 'storeWoocommerceKeys';
          let url = req.body.domain + 'wc-auth/v1/authorize?app_name=Blink&scope=read_write&user_id=blink&return_url=' + return_url + '&callback_url=' + callback_url;
-          res.send({ success: true, data: { url: url } }) 
-         // res.redirect(url);
-
+         res.send({ success: true, data: { url: url } }) 
+         
       //}
    }  catch( err ){
-      return { success: false, error: err.message }
+      res.send({ success: false, error: err.message })
    }
       
 
