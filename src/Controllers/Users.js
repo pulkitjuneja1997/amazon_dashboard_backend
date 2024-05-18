@@ -13,7 +13,10 @@ async function usersControllers(req, res){
             const generateTokenResults  = await newUser.generateToken();
             console.log( generateTokenResults )
             if( generateTokenResults.success ){
-                res.status(200).json( { messasge: 'User hasbeen successfully registered', url: process.env.FRONTEND_URL + 'home' });
+                res.status(200).json( { messasge: 'User hasbeen successfully registered', url: process.env.FRONTEND_URL + 'home', userData: {
+                    token: generateTokenResults.data.token,
+                    email: generateTokenResults.data.email
+                } });
             } else{
                 res.status(400).json(  {error: 'Uanble to register User. Please try again'} );
             }
